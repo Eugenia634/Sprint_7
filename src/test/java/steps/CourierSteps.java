@@ -1,18 +1,19 @@
+package steps;
+
 import io.qameta.allure.Step;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
+import model.CourierRequestCreation;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
+import static constants.TestConstants.*;
 import static io.restassured.RestAssured.given;
 
-public class CourierTest {
-    private static final String LOGIN_URN = "/api/v1/courier/login";
-    private static final String COURIER_URN = "/api/v1/courier/";
+public class CourierSteps {
 
-    private static final String BASE_URL = BasicTest.URL;
     @Step("Courier authorization with login '{login}' and password '{password}'")
     public Response loginCourier(String login, String password) {
         Map<String, Object> body = new HashMap<>();
@@ -23,7 +24,7 @@ public class CourierTest {
                 .contentType(ContentType.JSON)
                 .body(body)
                 .when()
-                .post(BASE_URL + LOGIN_URN);
+                .post(BASE_URL + LOGIN_URL);
     }
 
     @Step("Generate Unique Login")
@@ -53,7 +54,7 @@ public class CourierTest {
                 .header("Content-type", "application/json")
                 .body(body)
                 .when()
-                .delete(BASE_URL + COURIER_URN + courierId)
+                .delete(BASE_URL + COURIER_URL + courierId)
                 .then()
                 .statusCode(200);
     }
@@ -64,7 +65,7 @@ public class CourierTest {
                 .header("Content-type", "application/json")
                 .body(courierCreateRequest)
                 .when()
-                .post(BASE_URL + COURIER_URN);
+                .post(BASE_URL + COURIER_URL);
     }
 
 }

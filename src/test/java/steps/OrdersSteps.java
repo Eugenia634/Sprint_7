@@ -1,23 +1,23 @@
+package steps;
+
 import io.qameta.allure.Step;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 
 import java.util.*;
 
+import static constants.TestConstants.BASE_URL;
+import static constants.TestConstants.ORDERS_URL;
 import static io.restassured.RestAssured.given;
 
-public class OrdersCheck {
-
-    private static final String ORDERS_URN = "/api/v1/orders";
-
-    private static final String BASE_URL = BasicTest.URL;
+public class OrdersSteps {
 
     @Step("Get the list of orders")
     public Response getOrders() {
         return given()
                 .contentType(ContentType.JSON)
                 .when()
-                .get(BASE_URL + ORDERS_URN);
+                .get(BASE_URL + ORDERS_URL);
     }
 
     @Step("Order creating")
@@ -28,7 +28,7 @@ public class OrdersCheck {
                 .header("Content-type", "application/json")
                 .body(body)
                 .when()
-                .post(BASE_URL + ORDERS_URN);
+                .post(BASE_URL + ORDERS_URL);
     }
 
     @Step("Json creating for order request")

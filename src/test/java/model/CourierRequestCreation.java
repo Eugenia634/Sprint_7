@@ -1,3 +1,5 @@
+package model;
+
 public class CourierRequestCreation {
     private String login;
     private String password;

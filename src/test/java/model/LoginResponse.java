@@ -1,4 +1,6 @@
-public class  LoginResponse{
+package model;
+
+public class LoginResponse {
 	private String id;
 
 	public void setId(String id){

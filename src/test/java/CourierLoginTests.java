@@ -1,15 +1,27 @@
 import io.qameta.allure.Description;
 import io.qameta.allure.junit4.DisplayName;
 import io.restassured.response.Response;
+import model.CourierRequestCreation;
+import model.LoginResponse;
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
+import steps.CourierSteps;
 
 import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.hamcrest.Matchers.equalTo;
 
 @DisplayName("Login tests for Courier API")
 public class CourierLoginTests{
-    private static final CourierTest COURIER_CHECK = new CourierTest();
+    private static final CourierSteps COURIER_CHECK = new CourierSteps();
+    private String uniqueLogin;
+    private String password;
 
+    @Before
+    public void initialization() {
+        uniqueLogin = COURIER_CHECK.generateUniqueLogin();
+        password = COURIER_CHECK.generatePassword();
+    }
     @Test
     @DisplayName("The courier can authorize")
     @Description("The test checks the possibility of successful authorization of the courier")
@@ -23,9 +35,6 @@ public class CourierLoginTests{
         response.then()
                 .assertThat()
                 .statusCode(200);
-
-        LoginResponse loginResponse = response.body().as(LoginResponse.class);
-        COURIER_CHECK.deleteCourier(loginResponse.getId());
     }
 
     @Test
@@ -86,8 +95,16 @@ public class CourierLoginTests{
                 .assertThat()
                 .body("id", notNullValue());
 
-        LoginResponse loginResponse = response.body().as(LoginResponse.class);
-        COURIER_CHECK.deleteCourier(loginResponse.getId());
     }
+    @After
+    public void deleteCourier() {
 
+        Response response = COURIER_CHECK.loginCourier(uniqueLogin, password);
+
+        if (response.getStatusCode() == 200) {
+            LoginResponse loginResponse = response.body().as(LoginResponse.class);
+            COURIER_CHECK.deleteCourier(loginResponse.getId());
+        }
+
+    }
 }

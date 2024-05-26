@@ -1,21 +1,20 @@
 import io.qameta.allure.Description;
-import io.qameta.allure.Step;
 import io.qameta.allure.junit4.DisplayName;
 import io.restassured.response.Response;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
+import steps.OrdersSteps;
 
 import java.util.*;
 
-import static io.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.notNullValue;
 
 @RunWith(Parameterized.class)
 @DisplayName("Tests for Orders API")
-public class APIOrdersTests extends BasicTest {
+public class APIOrdersTests {
 
-    private static final OrdersCheck ORDER_HELPER = new OrdersCheck();
+    private static final OrdersSteps ORDER_HELPER = new OrdersSteps();
     private final String firstName;
     private final String lastName;
     private final String address;
