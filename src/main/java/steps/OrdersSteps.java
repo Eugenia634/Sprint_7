@@ -1,13 +1,12 @@
 package steps;
 
+import constants.TestConstants;
 import io.qameta.allure.Step;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 
 import java.util.*;
 
-import static constants.TestConstants.BASE_URL;
-import static constants.TestConstants.ORDERS_URL;
 import static io.restassured.RestAssured.given;
 
 public class OrdersSteps {
@@ -17,7 +16,7 @@ public class OrdersSteps {
         return given()
                 .contentType(ContentType.JSON)
                 .when()
-                .get(BASE_URL + ORDERS_URL);
+                .get(TestConstants.BASE_URL + TestConstants.ORDERS_URL);
     }
 
     @Step("Order creating")
@@ -28,7 +27,7 @@ public class OrdersSteps {
                 .header("Content-type", "application/json")
                 .body(body)
                 .when()
-                .post(BASE_URL + ORDERS_URL);
+                .post(TestConstants.BASE_URL + TestConstants.ORDERS_URL);
     }
 
     @Step("Json creating for order request")

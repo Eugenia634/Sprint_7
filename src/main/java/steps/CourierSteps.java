@@ -1,5 +1,6 @@
 package steps;
 
+import constants.TestConstants;
 import io.qameta.allure.Step;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
@@ -9,10 +10,10 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
-import static constants.TestConstants.*;
 import static io.restassured.RestAssured.given;
 
-public class CourierSteps {
+public class
+CourierSteps {
 
     @Step("Courier authorization with login '{login}' and password '{password}'")
     public Response loginCourier(String login, String password) {
@@ -24,7 +25,7 @@ public class CourierSteps {
                 .contentType(ContentType.JSON)
                 .body(body)
                 .when()
-                .post(BASE_URL + LOGIN_URL);
+                .post(TestConstants.BASE_URL + TestConstants.LOGIN_URL);
     }
 
     @Step("Generate Unique Login")
@@ -54,7 +55,7 @@ public class CourierSteps {
                 .header("Content-type", "application/json")
                 .body(body)
                 .when()
-                .delete(BASE_URL + COURIER_URL + courierId)
+                .delete(TestConstants.BASE_URL + TestConstants.COURIER_URL + courierId)
                 .then()
                 .statusCode(200);
     }
@@ -65,7 +66,7 @@ public class CourierSteps {
                 .header("Content-type", "application/json")
                 .body(courierCreateRequest)
                 .when()
-                .post(BASE_URL + COURIER_URL);
+                .post(TestConstants.BASE_URL + TestConstants.COURIER_URL);
     }
 
 }
