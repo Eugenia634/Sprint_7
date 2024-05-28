@@ -1,6 +1,6 @@
 package steps;
 
-import constants.TestConstants;
+import constants.Constants;
 import io.qameta.allure.Step;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
@@ -25,7 +25,7 @@ CourierSteps {
                 .contentType(ContentType.JSON)
                 .body(body)
                 .when()
-                .post(TestConstants.BASE_URL + TestConstants.LOGIN_URL);
+                .post(Constants.BASE_URL + Constants.LOGIN_URL);
     }
 
     @Step("Generate Unique Login")
@@ -55,7 +55,7 @@ CourierSteps {
                 .header("Content-type", "application/json")
                 .body(body)
                 .when()
-                .delete(TestConstants.BASE_URL + TestConstants.COURIER_URL + courierId)
+                .delete(Constants.BASE_URL + Constants.COURIER_URL + courierId)
                 .then()
                 .statusCode(200);
     }
@@ -66,7 +66,7 @@ CourierSteps {
                 .header("Content-type", "application/json")
                 .body(courierCreateRequest)
                 .when()
-                .post(TestConstants.BASE_URL + TestConstants.COURIER_URL);
+                .post(Constants.BASE_URL + Constants.COURIER_URL);
     }
 
 }

@@ -1,6 +1,6 @@
 package constants;
 
-public class TestConstants {
+public class Constants {
 
     public static final String LOGIN_URL = "/api/v1/courier/login";
     public static final String COURIER_URL = "/api/v1/courier/";
